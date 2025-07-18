@@ -72,16 +72,64 @@
     const cursos = [
       { ciclo: 1, codigo: 'AE-0115', nombre: 'Intro a la Economía Agrícola', requisitos: [] },
       { ciclo: 1, codigo: 'B-0106', nombre: 'Biología General', requisitos: [] },
-      { ciclo: 1, codigo: 'B-0107', nombre: 'Lab Biología', requisitos: ['B-0106'] },
+      { ciclo: 1, codigo: 'B-0107', nombre: 'Lab Biología General', requisitos: ['B-0106'] },
+      { ciclo: 1, codigo: 'EF', nombre: 'Actividad Deportiva', requisitos: [] },
+      { ciclo: 1, codigo: 'EG-I', nombre: 'Humanidades I', requisitos: [] },
+      { ciclo: 1, codigo: 'MA-0001', nombre: 'Precálculo', requisitos: [] },
+      { ciclo: 1, codigo: 'QU-0110', nombre: 'Química General y Biológica I', requisitos: [] },
+      { ciclo: 1, codigo: 'RP', nombre: 'Repertorio', requisitos: [] },
+
       { ciclo: 2, codigo: 'AE-0116', nombre: 'Contabilidad Agronegocios', requisitos: ['AE-0115'] },
-      { ciclo: 2, codigo: 'B-0111', nombre: 'Botánica Agrícola', requisitos: ['B-0106', 'B-0107'] },
+      { ciclo: 2, codigo: 'B-0111', nombre: 'Botánica Agrícola I', requisitos: ['B-0106', 'B-0107'] },
+      { ciclo: 2, codigo: 'EG-II', nombre: 'Humanidades II', requisitos: ['EG-I'] },
+      { ciclo: 2, codigo: 'MA-1021', nombre: 'Cálculo I (Económicas)', requisitos: ['MA-0001'] },
+
       { ciclo: 3, codigo: 'AE-0117', nombre: 'Métodos de Costeo', requisitos: ['AE-0116'] },
       { ciclo: 3, codigo: 'AE-0118', nombre: 'Microeconomía Agrícola', requisitos: ['MA-1021'] },
+      { ciclo: 3, codigo: 'AF-0136', nombre: 'Producción Vegetal', requisitos: ['QU-0110', 'B-0111'] },
+      { ciclo: 3, codigo: 'AZ-0310', nombre: 'Producción de Rumiantes', requisitos: ['QU-0110'] },
+      { ciclo: 3, codigo: 'MA-1022', nombre: 'Cálculo II (Económicas)', requisitos: ['MA-1021'] },
+      { ciclo: 3, codigo: 'SR-I', nombre: 'Seminario Realidad Nacional I', requisitos: ['EG-II'] },
+      { ciclo: 3, codigo: 'TA-0205', nombre: 'Tecnología de Alimentos', requisitos: ['QU-0110', 'B-0106'] },
+
+      { ciclo: 4, codigo: 'AE-0119', nombre: 'Contabilidad Administrativa', requisitos: ['AE-0117'] },
+      { ciclo: 4, codigo: 'AE-0120', nombre: 'Macroeconomía Agrícola', requisitos: ['AE-0118', 'MA-1022'] },
       { ciclo: 4, codigo: 'AE-0121', nombre: 'Administración Agroempresarial', requisitos: ['AE-0116'] },
+      { ciclo: 4, codigo: 'AE-0122', nombre: 'Estadística I', requisitos: ['MA-1022'] },
+      { ciclo: 4, codigo: 'AE-0123', nombre: 'Microeconomía Avanzada', requisitos: ['AE-0118', 'MA-1022'] },
+      { ciclo: 4, codigo: 'AF-0137', nombre: 'Tecnología Agrícola', requisitos: ['AF-0136'] },
+      { ciclo: 4, codigo: 'AZ-0317', nombre: 'Producción en Monogástricos', requisitos: ['AZ-0310'] },
+
       { ciclo: 5, codigo: 'AE-0124', nombre: 'Finanzas Agronegocios', requisitos: ['AE-0119', 'MA-1022'] },
+      { ciclo: 5, codigo: 'AE-0125', nombre: 'Mercadeo Agronegocios', requisitos: ['AE-0123'] },
+      { ciclo: 5, codigo: 'AE-0126', nombre: 'Estadística II', requisitos: ['AE-0122'] },
+      { ciclo: 5, codigo: 'AE-0127', nombre: 'Estrategia Agroempresarial', requisitos: ['AE-0121'] },
+      { ciclo: 5, codigo: 'AE-0128', nombre: 'Calidad e Inocuidad Agropecuaria', requisitos: ['AF-0137', 'AZ-0317', 'TA-0205'] },
+      { ciclo: 5, codigo: 'AE-0129', nombre: 'Productividad Agroeconómica', requisitos: ['AE-0123'] },
+      { ciclo: 5, codigo: 'AE-3104', nombre: 'Macroeconomía I', requisitos: ['AE-0120'] },
+
       { ciclo: 6, codigo: 'AE-0130', nombre: 'Mercadotecnia Agronegocios', requisitos: ['AE-0125'] },
-      { ciclo: 7, codigo: 'AE-0133', nombre: 'Evaluación de Proyectos', requisitos: ['AE-0124'] },
-      { ciclo: 8, codigo: 'AE-4103', nombre: 'Comercio Int. Agropecuario', requisitos: ['AE-0123'] }
+      { ciclo: 6, codigo: 'AE-0131', nombre: 'Tecnologías Información Agronegocios', requisitos: ['AE-0121', 'AE-0122', 'AE-0124'] },
+      { ciclo: 6, codigo: 'AE-0132', nombre: 'Métodos Cuantitativos', requisitos: ['AE-0124', 'AE-0129'] },
+      { ciclo: 6, codigo: 'AE-3106', nombre: 'Econometría I', requisitos: ['AE-0123', 'AE-3104', 'AE-0126'] },
+      { ciclo: 6, codigo: 'AE-3204', nombre: 'Macroeconomía II', requisitos: ['AE-3104'] },
+      { ciclo: 6, codigo: 'EG-ARTE', nombre: 'Curso de Arte', requisitos: [] },
+      { ciclo: 6, codigo: 'OPT-1265', nombre: 'Optativo I: Desarrollo Rural', requisitos: [] },
+
+      { ciclo: 7, codigo: 'AE-0133', nombre: 'Evaluación Proyectos', requisitos: ['AE-0124', 'AE-0126', 'AE-0130'] },
+      { ciclo: 7, codigo: 'AE-0134', nombre: 'Emprendimiento Agroindustrial', requisitos: ['AE-0127', 'AE-0130'] },
+      { ciclo: 7, codigo: 'AE-0135', nombre: 'Agronegocios Competitivos', requisitos: ['AE-0127', 'AE-0130'] },
+      { ciclo: 7, codigo: 'AE-3206', nombre: 'Tasación', requisitos: ['AE-0124', 'AE-3106'] },
+      { ciclo: 7, codigo: 'AE-4104', nombre: 'Política Sector Agropecuario', requisitos: ['AE-3204'] },
+      { ciclo: 7, codigo: 'AE-4204', nombre: 'Economía Recursos Naturales', requisitos: ['AE-0123', 'AE-0128', 'AE-3204'] },
+      { ciclo: 7, codigo: 'OPT-1266', nombre: 'Optativo II: Agronegocios', requisitos: [] },
+      { ciclo: 7, codigo: 'SR-II', nombre: 'Seminario Realidad Nacional II', requisitos: ['SR-I'] },
+
+      { ciclo: 8, codigo: 'AE-4103', nombre: 'Comercio Internacional', requisitos: ['AE-0123', 'AE-0128', 'AE-3204'] },
+      { ciclo: 8, codigo: 'AE-4200', nombre: 'Optimización Financiera', requisitos: ['AE-0133'] },
+      { ciclo: 8, codigo: 'AE-4205', nombre: 'Organización Agroempresarial', requisitos: ['AE-0135', 'AE-4104'] },
+      { ciclo: 8, codigo: 'AE-4208', nombre: 'Práctica Profesional', requisitos: ['AE-0133', 'AE-0135', 'AE-3206', 'AE-4204'] },
+      { ciclo: 8, codigo: 'OPT-1267', nombre: 'Optativo III: Economía Agrícola', requisitos: [] }
     ];
 
     const estadoCursos = JSON.parse(localStorage.getItem('estadoCursos') || '{}');
