@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Curricular Economía Agrícola UCR</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f8f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2a5d84;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .column {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .column h2 {
+      font-size: 16px;
+      color: #3e7ca8;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .course {
+      background: #e0edf4;
+      margin-bottom: 8px;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .course.approved {
+      background: #b7e3c6;
+      text-decoration: line-through;
+    }
+    .course.locked {
+      background: #ddd;
+      cursor: not-allowed;
+    }
+    .course:hover:not(.locked)::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #333;
+      color: #fff;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      margin-top: 4px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Curricular - Economía Agrícola (UCR)</h1>
+  <div class="grid" id="malla"></div>
+  <script>
+    const cursos = [
+      { ciclo: 1, codigo: 'AE-0115', nombre: 'Intro a la Economía Agrícola', requisitos: [] },
+      { ciclo: 1, codigo: 'B-0106', nombre: 'Biología General', requisitos: [] },
+      { ciclo: 1, codigo: 'B-0107', nombre: 'Lab Biología', requisitos: ['B-0106'] },
+      { ciclo: 2, codigo: 'AE-0116', nombre: 'Contabilidad Agronegocios', requisitos: ['AE-0115'] },
+      { ciclo: 2, codigo: 'B-0111', nombre: 'Botánica Agrícola', requisitos: ['B-0106', 'B-0107'] },
+      { ciclo: 3, codigo: 'AE-0117', nombre: 'Métodos de Costeo', requisitos: ['AE-0116'] },
+      { ciclo: 3, codigo: 'AE-0118', nombre: 'Microeconomía Agrícola', requisitos: ['MA-1021'] },
+      { ciclo: 4, codigo: 'AE-0121', nombre: 'Administración Agroempresarial', requisitos: ['AE-0116'] },
+      { ciclo: 5, codigo: 'AE-0124', nombre: 'Finanzas Agronegocios', requisitos: ['AE-0119', 'MA-1022'] },
+      { ciclo: 6, codigo: 'AE-0130', nombre: 'Mercadotecnia Agronegocios', requisitos: ['AE-0125'] },
+      { ciclo: 7, codigo: 'AE-0133', nombre: 'Evaluación de Proyectos', requisitos: ['AE-0124'] },
+      { ciclo: 8, codigo: 'AE-4103', nombre: 'Comercio Int. Agropecuario', requisitos: ['AE-0123'] }
+    ];
+
+    const estadoCursos = JSON.parse(localStorage.getItem('estadoCursos') || '{}');
+
+    function renderMalla() {
+      const container = document.getElementById('malla');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= 8; i++) {
+        const col = document.createElement('div');
+        col.className = 'column';
+        col.innerHTML = `<h2>Ciclo ${i}</h2>`;
+
+        cursos.filter(c => c.ciclo === i).forEach(curso => {
+          const div = document.createElement('div');
+          div.className = 'course';
+          div.textContent = `${curso.codigo}\n${curso.nombre}`;
+          div.dataset.codigo = curso.codigo;
+
+          const aprobados = Object.keys(estadoCursos).filter(k => estadoCursos[k]);
+          const faltantes = curso.requisitos.filter(r => !aprobados.includes(r));
+
+          if (estadoCursos[curso.codigo]) div.classList.add('approved');
+          else if (faltantes.length) {
+            div.classList.add('locked');
+            div.dataset.tooltip = `Faltan: ${faltantes.join(', ')}`;
+          }
+
+          div.addEventListener('click', () => {
+            if (div.classList.contains('locked')) return;
+            estadoCursos[curso.codigo] = !estadoCursos[curso.codigo];
+            localStorage.setItem('estadoCursos', JSON.stringify(estadoCursos));
+            renderMalla();
+          });
+
+          col.appendChild(div);
+        });
+
+        container.appendChild(col);
+      }
+    }
+
+    renderMalla();
+  </script>
+</body>
+</html>
