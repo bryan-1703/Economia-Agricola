@@ -129,10 +129,17 @@
       { ciclo: 8, codigo: 'AE-4200', nombre: 'Optimización Financiera', requisitos: ['AE-0133'] },
       { ciclo: 8, codigo: 'AE-4205', nombre: 'Organización Agroempresarial', requisitos: ['AE-0135', 'AE-4104'] },
       { ciclo: 8, codigo: 'AE-4208', nombre: 'Práctica Profesional', requisitos: ['AE-0133', 'AE-0135', 'AE-3206', 'AE-4204'] },
-      { ciclo: 8, codigo: 'OPT-1267', nombre: 'Optativo III: Economía Agrícola', requisitos: [] }
+      { ciclo: 8, codigo: 'OPT-1267', nombre: 'Optativo III: Economía Agrícola', requisitos: [] },
+      { ciclo: 8, codigo: 'AE-0139', nombre: 'Derecho Agronegocios', requisitos: ['AE-0127'] }
+    ];
+
+    const convalidados = [
+      'AE-0116','AE-0117','AE-0118','AE-0119','AE-0122','AE-0124',
+      'AE-0125','AE-0130','AE-0132','AE-0133','AE-0139','AE-4200'
     ];
 
     const estadoCursos = JSON.parse(localStorage.getItem('estadoCursos') || '{}');
+    convalidados.forEach(sigla => estadoCursos[sigla] = true);
 
     function renderMalla() {
       const container = document.getElementById('malla');
